@@ -32,5 +32,13 @@
     "express-handlebars": "^5.1.0",
     "mongoose": "^5.10.7",
     "serve-favicon": "^2.5.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntesch17/Simple-MVC-Example.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ntesch17/Simple-MVC-Example/issues"
+  },
+  "homepage": "https://github.com/ntesch17/Simple-MVC-Example#readme"
 }
