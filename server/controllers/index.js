@@ -129,6 +129,7 @@ const setNameCats = (req, res) => {
 };
 
 const searchNameCats = (req, res) => {
+  lastAddedCats.bedsOwned++;
     if (!req.query.name) {
         return res.status(400).json({ error: 'Name is required to perform a search' });
     }
@@ -204,6 +205,7 @@ const setNameDogs = (req, res) => {
 };
 
 const searchNameDogs = (req, res) => {
+  lastAddedDogs.age++;
     if (!req.query.name) {
         return res.status(400).json({ error: 'Name is required to perform a search' });
     }
@@ -212,7 +214,7 @@ const searchNameDogs = (req, res) => {
         if (err) { return res.status(500).json({ err }); }
 
         if (!doc) {
-            return res.json({ error: 'No Cats Found' });
+            return res.json({ error: 'No Dogs Found' });
         }
 
         return res.json({
