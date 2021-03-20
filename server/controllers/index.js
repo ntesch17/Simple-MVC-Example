@@ -21,7 +21,7 @@ let lastAddedDogs = new Dog(defaultData2);
 
 const hostIndex = (req, res) => {
   res.render('index', {
-    currentName: `Cat: ${lastAddedCats.name} Dog: ${lastAddedDogs.name}}`,
+    currentName: `Cat: ${lastAddedCats.name} Dog: ${lastAddedDogs.name}`,
     title: 'Home',
     pageName: 'Home Page',
   });
@@ -97,7 +97,7 @@ const getNameCats = (req, res) => {
 
 const setNameCats = (req, res) => {
   if (!req.body.name || !req.body.beds) {
-    return res.status(400).json({ error: 'firstname,lastname and beds are all required' });
+    return res.status(400).json({ error: 'The cats name and beds are all required.' });
   }
 
   const name = `${req.body.name}`;
@@ -128,7 +128,6 @@ const setNameCats = (req, res) => {
 };
 
 const searchNameCats = (req, res) => {
-  lastAddedCats.bedsOwned++;
   if (!req.query.name) {
     return res.status(400).json({ error: 'Name is required to perform a search' });
   }
@@ -140,11 +139,9 @@ const searchNameCats = (req, res) => {
       return res.json({ error: 'No Cats Found' });
     }
 
-    
-
     return res.json({
       name: doc.name,
-      beds: doc.bedsOwned++,
+      beds: doc.bedsOwned,
     });
   });
 };
@@ -172,7 +169,7 @@ const getNameDogs = (req, res) => {
 
 const setNameDogs = (req, res) => {
   if (!req.body.name || !req.body.breed || !req.body.age) {
-    return res.status(400).json({ error: 'Name, breed and age are all required' });
+    return res.status(400).json({ error: 'Name, breed and age are all required.' });
   }
 
   const name = `${req.body.name}`;
@@ -207,20 +204,26 @@ const setNameDogs = (req, res) => {
 
 const searchNameDogs = (req, res) => {
   if (!req.query.name) {
-    return res.status(400).json({ error: 'Name is required to perform a search' });
+    return res.status(400).json({ error: 'Name is required to perform a search.' });
   }
 
   return Dog.findByName(req.query.name, (err, doc) => {
     if (err) { return res.status(500).json({ err }); }
 
     if (!doc) {
-      return res.json({ error: 'No Dogs Found' });
+      return res.json({ error: 'No Dogs Found.' });
     }
 
-    return res.json({
-      name: doc.name,
-      breed: doc.breed,
-      age: doc.age,
+    let updateDog = doc;
+    updateDog.age++;
+    const updatePromise = updateDog.save();
+
+    updatePromise.then(() => {
+      res.json({
+        name: updateDog.name,
+        breed: updateDog.breed,
+        age: updateDog.age,
+      });
     });
   });
 };
@@ -233,7 +236,7 @@ const updateLastDogs = (req, res) => {
   savePromise.then(() => {
     res.json({
       name: lastAddedDogs.name,
-      beds: lastAddedDogs.breed,
+      breed: lastAddedDogs.breed,
       age: lastAddedDogs.age,
     });
   });
@@ -244,7 +247,7 @@ const updateLastDogs = (req, res) => {
 };
 
 const notFound = (req, res) => {
-  res.status(404).render('notFound', {
+  res.status(404).render('notFound.', {
     page: req.url,
   });
 };
