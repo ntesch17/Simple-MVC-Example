@@ -22,7 +22,7 @@ const mongooseOptions = {
 
 mongoose.connect(dbURL, mongooseOptions, (err) => {
   if (err) {
-    console.log('Could not connect to database');
+    console.log('Could not connect to database.');
     throw err;
   }
 });
