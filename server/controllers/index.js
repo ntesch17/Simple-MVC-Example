@@ -117,6 +117,7 @@ const setNameCats = (req, res) => {
     res.json({
       name: lastAddedCats.name,
       beds: lastAddedCats.bedsOwned,
+      createdDate:  lastAddedCats.createdDate,
     });
   });
 
@@ -142,6 +143,7 @@ const searchNameCats = (req, res) => {
     return res.json({
       name: doc.name,
       beds: doc.bedsOwned,
+      createdDate: doc.createdDate,
     });
   });
 };
@@ -155,6 +157,7 @@ const updateLastCats = (req, res) => {
     res.json({
       name: lastAddedCats.name,
       beds: lastAddedCats.bedsOwned,
+      createdDate:  lastAddedCats.createdDate,
     });
   });
 
@@ -179,6 +182,7 @@ const setNameDogs = (req, res) => {
     name,
     breed,
     age: req.body.age,
+    createdDate: req.body.createdDate,
   };
 
   const newDog = new Dog(dogData);
@@ -192,6 +196,7 @@ const setNameDogs = (req, res) => {
       name: lastAddedDogs.name,
       breed: lastAddedDogs.breed,
       age: lastAddedDogs.age,
+      createdDate: lastAddedDogs.createdDate,
     });
   });
 
@@ -222,6 +227,7 @@ const searchNameDogs = (req, res) => {
       name: updateDog.name,
       breed: updateDog.breed,
       age: updateDog.age,
+      createdDate: updateDog.createdDate,
     }));
   });
 };
@@ -236,6 +242,7 @@ const updateLastDogs = (req, res) => {
       name: lastAddedDogs.name,
       breed: lastAddedDogs.breed,
       age: lastAddedDogs.age,
+      createdDate:  lastAddedDogs.createdDate,
     });
   });
 
