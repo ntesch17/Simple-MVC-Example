@@ -129,14 +129,14 @@ const setNameCats = (req, res) => {
 
 const searchNameCats = (req, res) => {
   if (!req.query.name) {
-    return res.status(400).json({ error: 'Name is required to perform a search' });
+    return res.status(400).json({ error: 'Name is required to perform a search.' });
   }
 
   return Cat.findByName(req.query.name, (err, doc) => {
     if (err) { return res.status(500).json({ err }); }
 
     if (!doc) {
-      return res.json({ error: 'No Cats Found' });
+      return res.json({ error: 'No Cats Found.' });
     }
 
     return res.json({
