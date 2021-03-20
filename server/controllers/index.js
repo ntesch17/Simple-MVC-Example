@@ -97,7 +97,7 @@ const getNameCats = (req, res) => {
 
 const setNameCats = (req, res) => {
   if (!req.body.name || !req.body.beds) {
-    return res.status(400).json({ error: 'The cats name and beds are all required.' });
+    return res.status(400).json({ error: 'The cats name and beds are required.' });
   }
 
   const name = `${req.body.name}`;
